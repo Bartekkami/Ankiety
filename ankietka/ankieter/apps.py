@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class ApteczkaConfig(AppConfig):
-    name = 'apteczka'
+class AnkieterConfig(AppConfig):
+    name = 'ankieter'

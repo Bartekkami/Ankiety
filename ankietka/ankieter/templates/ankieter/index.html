@@ -1,0 +1,9 @@
+{% if lista_ostatnich_pytan %}
+    <ul>
+    {% for Pytanie in lista_ostatnich_pytan %}
+        <li><a href="/ankieter/{{ pytanie.id }}/">{{ Pytanie.pytanie_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nie ma dostepnych ankiet.</p>
+{% endif %}
