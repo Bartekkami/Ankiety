@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'ankieter.apps.AnkieterConfig',
+    'ankieter',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',

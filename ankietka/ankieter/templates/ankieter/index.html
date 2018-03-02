@@ -1,7 +1,7 @@
 {% if lista_ostatnich_pytan %}
     <ul>
-    {% for Pytanie in lista_ostatnich_pytan %}
-        <li><a href="/ankieter/{{ pytanie.id }}/">{{ Pytanie.pytanie_text }}</a></li>
+    {% for p in lista_ostatnich_pytan %}
+        <li><a href="{% url 'ankieter:szczegoly' p.id %}/">{{ p.pytanie_text }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

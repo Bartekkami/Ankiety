@@ -1,0 +1,10 @@
+<h1>Odpowiedzi</h1>
+<h3>{{ pytanie.pytanie_text }}</h3>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<ol>
+{% for wybor in pytanie.wybor_set.all %}
+    <li>{{ wybor.wybor_text }} : {{ wybor.votes }}</li>
+{% endfor %}
+</ol>
