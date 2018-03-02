@@ -22,7 +22,6 @@ class WynikiView(generic.DetailView):
     template_name = 'ankieter/wyniki.html'
 
 
-
 def glos(request, pytanie_id):
     pytanie = Pytanie.objects.get(pk=pytanie_id)
     if request.method == 'POST':
