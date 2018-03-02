@@ -3,25 +3,24 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .models import Pytanie, Wybor
 from django.template import loader
 from django.urls import reverse
+from django.views import generic
 
 
-def index(request):
-    pytania = Pytanie.objects.all()
-    lista_ostatnich_pytan = Pytanie.objects.order_by('-pub_date')[:5]
-    template = loader.get_template('ankieter/index.html')
-    context = {'lista_ostatnich_pytan': lista_ostatnich_pytan,}
-    return render(request, 'ankieter/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'ankieter/index.html'
+    context_object_name = 'lista_ostatnich_pytan'
 
+    def get_queryset(self):
+        return Pytanie.objects.order_by('-pub_date') [:5]
 
+class SzczegolyView(generic.DetailView):
+    model = Pytanie
+    template_name = 'ankieter/szczegoly.html'
 
-def szczegoly(request, pytanie_id):
-    pytanie = get_object_or_404(Pytanie, pk=pytanie_id)
-    return render(request, 'ankieter/szczegoly.html', {'pytanie': pytanie})
+class WynikiView(generic.DetailView):
+    model = Pytanie
+    template_name = 'ankieter/wyniki.html'
 
-
-def wyniki(request, pytanie_id):
-    pytanie = Pytanie.objects.get(pk=pytanie_id)
-    return render(request, 'ankieter/wyniki.html', {'pytanie':pytanie})
 
 
 def glos(request, pytanie_id):
