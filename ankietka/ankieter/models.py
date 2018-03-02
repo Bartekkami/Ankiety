@@ -22,3 +22,6 @@ class Wybor(models.Model):
     votes = models.IntegerField(default=0)
     def __str__(self):
         return self.wybor_text
+    class Meta:
+        verbose_name = 'Wybor'
+        verbose_name_plural = 'Wybory'
