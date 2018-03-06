@@ -6,7 +6,7 @@
 {% if lista_ostatnich_pytan %}
     <ul>
     {% for p in lista_ostatnich_pytan %}
-        <li><a href="{% url 'ankieter:szczegoly' p.id %}/">{{ p.pytanie_text }}</a></li>
+        <li><a href="{% url 'ankieter:szczegoly' p.id %}">{{ p.pytanie_text }}</a></li>
         <p>{{p.pub_date}}</p>
     {% endfor %}
     </ul>

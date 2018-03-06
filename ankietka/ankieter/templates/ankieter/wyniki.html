@@ -1,10 +1,20 @@
-<h1>Odpowiedzi</h1>
+{% extends 'podstawa.html' %}
+
+{% block content %}
+
+<h1>Na pytanie:</h1>
 <h3>{{ pytanie.pytanie_text }}</h3>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if pytanie.pytanie_plik.url is not None %}
+<img src="{{ pytanie.pytanie_plik.url }}"  width="15%" height="15%"/>
+{% endif %}
 
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<p>Ankietowani odpowiedzieli:</p>
 <ol>
 {% for wybor in pytanie.wybor_set.all %}
     <li>{{ wybor.wybor_text }} : {{ wybor.votes }}</li>
 {% endfor %}
 </ol>
+
+{% endblock%}

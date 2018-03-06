@@ -1,12 +1,22 @@
-<h1>{{ pytanie.pytanie_text }}</h1>
+{% extends 'podstawa.html' %}
+
+{% block content %}
+
+<h2>Pytanie :</h2>
+<h3>{{ pytanie.pytanie_text }}</h3>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+{% if pytanie.pytanie_plik.url is not None %}
+<img src="{{ pytanie.pytanie_plik.url }}"  width="15%" height="15%"/>
+{% endif %}
 <form action="{% url 'ankieter:glos' pytanie.id %}" method="post">
 {% csrf_token %}
 {% for wybor in pytanie.wybor_set.all %}
     <input type="radio" name="wybor" id="wybor{{ forloop.counter }}" value="{{ wybor.id }}" />
-    <label for="wybor{{ forloop.counter }}">{{ wybor.wybor_text }}</label><br />
+    <label for="wybor{{ forloop.counter }}">{{ wybor.wybor_text}}<img src="{{ wybor.plik.url }}"  /></label><br />
 {% endfor %}
 <input type="submit" value="Glosuj" />
 </form>
+
+{% endblock %}

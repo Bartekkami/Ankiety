@@ -1,0 +1,18 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ankieter</title>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+  </head>
+  <body>
+    <div class="wrapper">
+      <a href="{% url 'ankieter:index' %}"><img src="{% static 'super.png'%}"/> </a>
+
+
+      {% block content %}
+      {% endblock %}
+
+  </body>
+</html>

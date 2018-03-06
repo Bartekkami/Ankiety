@@ -11,7 +11,7 @@ class WyborInline(admin.TabularInline):
 
 class PytanieAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['pytanie_text']}),
+        (None, {'fields': ['pytanie_text', 'pytanie_plik']}),
         ('Informacje o dacie', {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
     list_display = ('pytanie_text', 'pub_date')
