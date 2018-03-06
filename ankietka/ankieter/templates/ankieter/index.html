@@ -1,9 +1,17 @@
+{% extends 'podstawa.html' %}
+
+{% block content %}
+
+    <h1> Lista Ankiet </h1>
 {% if lista_ostatnich_pytan %}
     <ul>
-    {% for Pytanie in lista_ostatnich_pytan %}
-        <li><a href="/ankieter/{{ pytanie.id }}/">{{ Pytanie.pytanie_text }}</a></li>
+    {% for p in lista_ostatnich_pytan %}
+        <li><a href="{% url 'ankieter:szczegoly' p.id %}/">{{ p.pytanie_text }}</a></li>
+        <p>{{p.pub_date}}</p>
     {% endfor %}
     </ul>
 {% else %}
     <p>Nie ma dostepnych ankiet.</p>
 {% endif %}
+
+{% endblock %}

@@ -22,6 +22,6 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ankieter/', include('ankieter.urls')),
+    path('ankieter/', include('ankieter.urls', namespace='ankieter')),
 
 ]
