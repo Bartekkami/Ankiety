@@ -14,7 +14,7 @@
 {% csrf_token %}
 {% for wybor in pytanie.wybor_set.all %}
     <input type="radio" name="wybor" id="wybor{{ forloop.counter }}" value="{{ wybor.id }}" />
-    <label for="wybor{{ forloop.counter }}">{{ wybor.wybor_text}}<img src="{{ wybor.plik.url }}"  /></label><br />
+    <label for="wybor{{ forloop.counter }}">{{ wybor.wybor_text}}{% if wybor.plik.url is not None %}<img src="{{ wybor.plik.url }}"  />{% endif %}</label><br />
 {% endfor %}
 <input type="submit" value="Glosuj" />
 </form>

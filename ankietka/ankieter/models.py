@@ -19,7 +19,7 @@ class Pytanie(models.Model):
 
 class Wybor(models.Model):
     pytanie = models.ForeignKey(Pytanie, on_delete=models.CASCADE)
-    wybor_text = models.CharField(max_length=200)
+    wybor_text = models.CharField(max_length=200, blank=True)
     votes = models.IntegerField(default=0)
     plik = models.ImageField(default=None, blank=True)
     def __str__(self):

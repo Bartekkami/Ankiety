@@ -13,7 +13,7 @@
 <p>Ankietowani odpowiedzieli:</p>
 <ol>
 {% for wybor in pytanie.wybor_set.all %}
-    <li>{{ wybor.wybor_text }} : {{ wybor.votes }}</li>
+    <li>{{ wybor.wybor_text }} {% if wybor.plik.url is not None %}<img src="{{ wybor.plik.url }}"  />{% endif %} : {{ wybor.votes }}</li>
 {% endfor %}
 </ol>
 

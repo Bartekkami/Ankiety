@@ -1,9 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Pytanie, Wybor
 from django.template import loader
 from django.urls import reverse
 from django.views import generic
+from django.contrib.auth.forms import UserCreationForm
+
+
+
 
 
 class IndexView(generic.ListView):
@@ -31,6 +35,18 @@ def glos(request, pytanie_id):
         wybor.save()
         return HttpResponseRedirect(reverse('ankieter:wyniki', args=(pytanie_id,)))
     return render(request, 'ankieter/szczgoly.html', {'pytanie': pytanie})
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('ankieter:index')
+    else:
+        form = UserCreationForm()
+    return render(request,'ankieter/signup.html', {'form':form})
+
+
 
     # return HttpResponse("glosujesz na pytanie: %s" % pytanie)
     # Wybor.objects.get(pk=)
