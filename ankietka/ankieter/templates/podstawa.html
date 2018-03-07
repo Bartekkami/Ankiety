@@ -9,8 +9,16 @@
   <body>
     <div class="wrapper">
       <a href="{% url 'ankieter:index' %}"><img src="{% static 'super.png'%}"/> </a>
-
-
+      <nav>
+        <ul>
+          <li>
+            <form class="logout-link" action="{% url 'ankieter:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Wyloguj</button>
+            </form>
+          </li>
+        </ul>
+      </nav>
       {% block content %}
       {% endblock %}
 

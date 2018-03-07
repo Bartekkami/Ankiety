@@ -1,12 +1,12 @@
 {% extends 'podstawa.html'%}
 
 {% block content %}
-  <h1>SIEMA</h1>
+  <h1>SIEMA REJESTRUJ SIE</h1>
 
   <form class="site-form" action="/ankieter/signup/" method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="Signup">
+    <input type="submit" value="Zarejestruj">
 
   </form>
 {% endblock %}

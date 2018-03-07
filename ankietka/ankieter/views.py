@@ -4,8 +4,8 @@ from .models import Pytanie, Wybor
 from django.template import loader
 from django.urls import reverse
 from django.views import generic
-from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout
 
 
 
@@ -40,7 +40,9 @@ def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            #zaloguj i redirect na profil usera
+            login(request, user)
             return redirect('ankieter:index')
     else:
         form = UserCreationForm()
@@ -48,14 +50,20 @@ def signup_view(request):
 
 
 
-    # return HttpResponse("glosujesz na pytanie: %s" % pytanie)
-    # Wybor.objects.get(pk=)
-    # try:
-    #     zaznaczony_wybor = Pytanie.wybor_set.get(pk=request.POST['Wybor'])
-    # except (KeyError, Wybor.DoesNotExist):
-    #     return render(request, 'ankieter/szczgoly.html', {'Pytanie':pytanie, 'error_message' : "Nie odznaczyles wyboru"})
-    # else:
-    #     zaznaczony_wybor.glosy += 1
-    #     zaznaczony_wybor.save*()
-    #     return HttpResponseRedirect(reverse('ankieter:wyniki', args=(pytanie_id,)))
-    # return HttpResponse("glosujesz na pytania %s." % pytanie_id)
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data = request.POST)
+        if form.is_valid():
+            #zaloguj i redirect na profil usera
+            user = form.get_user()
+            login(request, user)
+            return redirect('ankieter:index')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'ankieter/login.html', {'form': form})
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+    return redirect('ankieter:index')
