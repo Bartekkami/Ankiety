@@ -6,8 +6,7 @@ from django.urls import reverse
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-
-
+from django.contrib.auth.decorators import login_required
 
 
 class IndexView(generic.ListView):
@@ -24,7 +23,6 @@ class SzczegolyView(generic.DetailView):
 class WynikiView(generic.DetailView):
     model = Pytanie
     template_name = 'ankieter/wyniki.html'
-
 
 def glos(request, pytanie_id):
     pytanie = Pytanie.objects.get(pk=pytanie_id)
@@ -48,8 +46,6 @@ def signup_view(request):
         form = UserCreationForm()
     return render(request,'ankieter/signup.html', {'form':form})
 
-
-
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data = request.POST)
@@ -57,13 +53,20 @@ def login_view(request):
             #zaloguj i redirect na profil usera
             user = form.get_user()
             login(request, user)
-            return redirect('ankieter:index')
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('ankieter:index')
     else:
         form = AuthenticationForm()
     return render(request, 'ankieter/login.html', {'form': form})
-
 
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
     return redirect('ankieter:index')
+
+
+@login_required(login_url="/ankieter/login/")
+def create_view(request):
+    return render(request, 'ankieter/create.html')

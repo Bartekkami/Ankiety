@@ -11,12 +11,14 @@
       <a href="{% url 'ankieter:index' %}"><img src="{% static 'super.png'%}"/> </a>
       <nav>
         <ul>
-          <li>
+
+            {% if user.is_authenticated  %}
             <form class="logout-link" action="{% url 'ankieter:logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit">Wyloguj</button>
+                {% endif %}
             </form>
-          </li>
+        
         </ul>
       </nav>
       {% block content %}
