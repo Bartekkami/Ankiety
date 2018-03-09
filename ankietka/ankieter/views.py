@@ -7,6 +7,7 @@ from django.views import generic
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from . import forms
 
 
 class IndexView(generic.ListView):
@@ -69,4 +70,51 @@ def logout_view(request):
 
 @login_required(login_url="/ankieter/login/")
 def create_view(request):
-    return render(request, 'ankieter/create.html')
+    if request.method == 'POST':
+        form = forms.StworzAnkiete(request.POST, request.FILES)
+        if form.is_valid():
+            return redirect('ankieter:index')
+    else:
+        form = forms.StworzAnkiete()
+    return render(request, 'ankieter/create.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pass
