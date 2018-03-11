@@ -1,12 +1,15 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 
 class Pytanie(models.Model):
     pytanie_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     pytanie_plik = models.ImageField(default=None, blank=True, null=True)
+    autor = models.ForeignKey(User, default=None, on_delete=None)
     def __str__(self):
         return self.pytanie_text
     def was_published_recently(self):

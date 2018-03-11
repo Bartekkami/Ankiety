@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from . import forms
+from django.utils import timezone
 
 
 class IndexView(generic.ListView):
@@ -73,6 +74,10 @@ def create_view(request):
     if request.method == 'POST':
         form = forms.StworzAnkiete(request.POST, request.FILES)
         if form.is_valid():
+            instance = form.save(commit=False)
+            instance.autor = request.user
+            instance.pub_date = timezone.now()
+            instance.save()
             return redirect('ankieter:index')
     else:
         form = forms.StworzAnkiete()

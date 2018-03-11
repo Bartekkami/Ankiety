@@ -16,9 +16,18 @@
             <form class="logout-link" action="{% url 'ankieter:logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit">Wyloguj</button>
+
+              <a href="{% url 'ankieter:create'%}">Stworz Ankiete<a/>
+
+                {% else %}
+                <a href="{% url 'ankieter:login'%}">Loguj<a/>
+                <a href="{% url 'ankieter:signup'%}">Zarejestruj<a/>
+                {% endif %}
+                {% if user.is_superuser %}
+                <a href=/admin/>Admin<a/>
                 {% endif %}
             </form>
-        
+
         </ul>
       </nav>
       {% block content %}

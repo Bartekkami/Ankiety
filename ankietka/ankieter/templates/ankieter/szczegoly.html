@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<h2>Pytanie :</h2>
+<h2>Pytanie {% if pytanie.autor.is_superuser %}administratora {% else %}uzytkownika {% endif %}{{pytanie.autor}} :</h2>
+
 <h3>{{ pytanie.pytanie_text }}</h3>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
