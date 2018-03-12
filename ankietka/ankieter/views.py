@@ -73,6 +73,7 @@ def logout_view(request):
 def create_view(request):
     if request.method == 'POST':
         form = forms.StworzAnkiete(request.POST, request.FILES)
+        form2 = forms.StworzWybor(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.autor = request.user
@@ -81,7 +82,8 @@ def create_view(request):
             return redirect('ankieter:index')
     else:
         form = forms.StworzAnkiete()
-    return render(request, 'ankieter/create.html', {'form': form})
+        form2 = forms.StworzWybor()
+    return render(request, 'ankieter/create.html', {'form': form,'form2': form2})
 
 
 
