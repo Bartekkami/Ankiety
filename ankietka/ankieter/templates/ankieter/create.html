@@ -7,8 +7,6 @@
     <form class="site-form" action="{% url 'ankieter:create' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form }}
-      <br></br>
-      {{ form2 }}
       <input type="submit" value="Stworz">
   </form>
   </div>

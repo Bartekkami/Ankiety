@@ -1,10 +1,15 @@
 {% extends 'podstawa.html' %}
 
 {% block content %}
+<div>
+  <p> {{  pytanie.ankieta }} </p>
+<div>
+  <p> {{ pytanie.grupa }}</p>
+<div>
 
-<h2>Pytanie {% if pytanie.autor.is_superuser %}administratora {% else %}uzytkownika {% endif %}{{pytanie.autor}} :</h2>
+<p>Pytanie {% if pytanie.autor.is_superuser %}administratora {% else %}uzytkownika {% endif %}{{pytanie.autor}} :</p>
 
-<h3>{{ pytanie.pytanie_text }}</h3>
+<p>{{ pytanie.pytanie_text }}</p>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -20,4 +25,7 @@
 <input type="submit" value="Glosuj" />
 </form>
 
+</div>
+</div>
+</div>
 {% endblock %}
