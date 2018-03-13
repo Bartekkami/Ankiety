@@ -2,12 +2,17 @@
 
 {% block content %}
 
-<h2>Pytanie {% if pytanie.autor.is_superuser %}administratora {% else %}uzytkownika {% endif %}{{pytanie.autor}} :</h2>
+  <p> {{  ankieta.nazwa_ankiety }} </p>
+<ul>
+{% for grupa in ankieta.grupa_set.all %}
+  <li> {{ grupa.nazwa_grupy }} </li>
 
-<h3>{{ pytanie.pytanie_text }}</h3>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<ul>
+{% for pytanie in grupa.pytanie_set.all %}
+<p>Pytanie {% if pytanie.autor.is_superuser %}administratora {% else %}uzytkownika {% endif %}{{pytanie.autor}} :</p>
 
+<p>{{ pytanie.pytanie_text }}</p>
 {% if pytanie.pytanie_plik.url is not None %}
 <img src="{{ pytanie.pytanie_plik.url }}"  width="15%" height="15%"/>
 {% endif %}
@@ -19,5 +24,11 @@
 {% endfor %}
 <input type="submit" value="Glosuj" />
 </form>
+{% endfor %}
+</ul>
+
+{% endfor %}
+</ul>
+
 
 {% endblock %}

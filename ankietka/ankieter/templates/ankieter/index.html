@@ -3,11 +3,10 @@
 {% block content %}
 
     <h1> Lista Ankiet </h1>
-{% if lista_ostatnich_pytan %}
+{% if lista_ostatnich_ankiet %}
     <ul>
-    {% for p in lista_ostatnich_pytan %}
-        <li><a href="{% url 'ankieter:szczegoly' p.id %}">{{ p.pytanie_text }}</a></li>
-        <p>{{p.pub_date}}</p>
+    {% for ankieta in lista_ostatnich_ankiet %}
+        <li><a href="{% url 'ankieter:szczegoly' ankieta.id %}">{{ ankieta.nazwa_ankiety }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

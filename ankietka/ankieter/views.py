@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse
-from .models import Pytanie, Wybor
+from .models import Pytanie, Wybor, Ankieta, Grupa
 from django.template import loader
 from django.urls import reverse
 from django.views import generic
@@ -13,13 +13,13 @@ from django.utils import timezone
 
 class IndexView(generic.ListView):
     template_name = 'ankieter/index.html'
-    context_object_name = 'lista_ostatnich_pytan'
+    context_object_name = 'lista_ostatnich_ankiet'
 
     def get_queryset(self):
-        return Pytanie.objects.order_by('-pub_date') [:15]
+        return Ankieta.objects.order_by('-id') [:15]
 
 class SzczegolyView(generic.DetailView):
-    model = Pytanie
+    model = Ankieta
     template_name = 'ankieter/szczegoly.html'
 
 class WynikiView(generic.DetailView):
