@@ -82,7 +82,7 @@ def create_view(request):
         if forma.is_valid():
             instancja = forma.save(commit=False)
             instancja.save()
-            
+
             return redirect('ankieter:index')
     else:
         form = forms.StworzAnkiete()

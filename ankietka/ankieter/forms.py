@@ -6,8 +6,11 @@ from .models import Pytanie, Wybor
 class StworzAnkiete(forms.ModelForm):
     class Meta:
         model = Pytanie
-        fields = '__all__'
+        fields = ['pytanie_text', 'pytanie_plik']
         exclude = ['autor', 'pub_date']
+
+
+
 
 class StworzWybor(forms.ModelForm):
     class Meta:
