@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 class Ankieta(models.Model):
     nazwa_ankiety = models.CharField(max_length=30, default=None)
+    autor = models.ForeignKey(User, default=None, on_delete=None)
     def __str__(self):
         return self.nazwa_ankiety
     class Meta:

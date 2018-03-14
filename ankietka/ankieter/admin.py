@@ -30,7 +30,7 @@ class GrupaAdmin(admin.ModelAdmin):
 class AnkietaAdmin(admin.ModelAdmin):
     model = Ankieta
     fieldsets = [
-        (None, {'fields': ['nazwa_ankiety']}),
+        (None, {'fields': ['nazwa_ankiety', 'autor']}),
     ]
     list_display = ('nazwa_ankiety',)
 

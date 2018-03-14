@@ -8,6 +8,7 @@ urlpatterns = [
     re_path(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^signup/$', views.signup_view, name="signup"),
     url(r'^login/$',views.login_view, name="login"),
+    url(r'^profil/$', views.ProfilView.as_view(), name='profil'),
     url(r'^logout/$', views.logout_view, name="logout"),
     url(r'^create/$', views.create_view, name="create"),
     path('<int:pk>/', views.SzczegolyView.as_view(), name='szczegoly'),

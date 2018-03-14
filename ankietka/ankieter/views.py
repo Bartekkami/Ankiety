@@ -41,9 +41,8 @@ def signup_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            #zaloguj i redirect na profil usera
             login(request, user)
-            return redirect('ankieter:index')
+            return redirect('ankieter:profil')
     else:
         form = UserCreationForm()
     return render(request,'ankieter/signup.html', {'form':form})
@@ -52,13 +51,12 @@ def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data = request.POST)
         if form.is_valid():
-            #zaloguj i redirect na profil usera
             user = form.get_user()
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
             else:
-                return redirect('ankieter:index')
+                return redirect('ankieter:profil')
     else:
         form = AuthenticationForm()
     return render(request, 'ankieter/login.html', {'form': form})
@@ -82,7 +80,6 @@ def create_view(request):
         if forma.is_valid():
             instancja = forma.save(commit=False)
             instancja.save()
-
             return redirect('ankieter:index')
     else:
         form = forms.StworzAnkiete()
@@ -90,16 +87,16 @@ def create_view(request):
     return render(request, 'ankieter/create.html', {'form':form, 'forma':forma})
 
 
+#def profil_view(request):
+#    return render(request, 'ankieter/profil.html')
 
 
+class ProfilView(generic.ListView):
+    template_name = 'ankieter/profil.html'
+    context_object_name = 'lista_ostatnich_ankiet'
 
-
-
-
-
-
-
-
+    def get_queryset(self):
+        return Ankieta.objects.order_by('-id') [:15]
 
 
 

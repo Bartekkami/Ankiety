@@ -1,0 +1,19 @@
+{% extends 'podstawa.html' %}
+
+{% block content %}
+<h1> Witaj {% if user.is_authenticated %}{{ user }} {% endif %} !</h1>
+<h2>Twoje Ankiety:</h2>
+{% if lista_ostatnich_ankiet %}
+<ul>
+  {% for ankieta in lista_ostatnich_ankiet %}
+      {% if user == ankieta.autor %}
+        <li><a href="{% url 'ankieter:szczegoly' ankieta.id %}">{{ ankieta.nazwa_ankiety }}</a></li>
+      {% endif %}
+  {% endfor %}
+</ul>
+{% else %}
+    <p>Nie ma dostepnych ankiet.</p>
+{% endif %}
+
+
+{% endblock %}
