@@ -7,12 +7,22 @@
     <form class="site-form" action="{% url 'ankieter:create' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form }}
-<<<<<<< HEAD
-      <br></br>
-      {{ forma }}
-=======
->>>>>>> bafe29863d38589a824598e54dd2728995ccf610
       <input type="submit" value="Stworz">
-  </form>
+    </form>
+    <form class="site-form" action="{% url 'ankieter:create' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form2 }}
+      <input type="submit" value="Stworz">
+    </form>
+    <form class="site-form" action="{% url 'ankieter:create' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form3 }}
+      <input type="submit" value="Stworz">
+    </form>
+    <form class="site-form" action="{% url 'ankieter:create' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form4 }}
+      <input type="submit" value="Stworz">
+    </form>
   </div>
 {% endblock %}

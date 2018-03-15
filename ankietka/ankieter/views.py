@@ -36,6 +36,8 @@ def glos(request, pytanie_id):
         return HttpResponseRedirect(reverse('ankieter:wyniki', args=(pytanie_id,)))
     return render(request, 'ankieter/szczgoly.html', {'pytanie': pytanie})
 
+
+
 def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -46,6 +48,8 @@ def signup_view(request):
     else:
         form = UserCreationForm()
     return render(request,'ankieter/signup.html', {'form':form})
+
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -61,6 +65,8 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'ankieter/login.html', {'form': form})
 
+
+
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
@@ -71,20 +77,25 @@ def logout_view(request):
 def create_view(request):
     if request.method == 'POST':
         form = forms.StworzAnkiete(request.POST, request.FILES)
-        forma = forms.StworzWybor(request.POST, request.FILES)
-        if form.is_valid() and forma.is_valid():
-            instance = form.save(commit=False)
+        form2 = forms.StworzGrupe(request.POST, request.FILES)
+        form3 = forms.StworzPytanie(request.POST, request.FILES)
+        form4 = forms.StworzWybor(request.POST, request.FILES)
+        if form3.is_valid():
+            instance = form3.save(commit=False)
             instance.autor = request.user
             instance.pub_date = timezone.now()
             instance.save()
-        if forma.is_valid():
-            instancja = forma.save(commit=False)
-            instancja.save()
-            return redirect('ankieter:index')
+#        if form4.is_valid():
+#            instancja = form4.save(commit=False)
+#            instancja.pytanie_id = Pytanie.wybor_id
+#            instancja.save()
+            return redirect('ankieter:create')
     else:
         form = forms.StworzAnkiete()
-        forma = forms.StworzWybor()
-    return render(request, 'ankieter/create.html', {'form':form, 'forma':forma})
+        form2 = forms.StworzGrupe()
+        form3 = forms.StworzPytanie()
+        form4 = forms.StworzWybor()
+    return render(request, 'ankieter/create.html', {'form':form, 'form2':form2, 'form3':form3, 'form4':form4})
 
 
 #def profil_view(request):

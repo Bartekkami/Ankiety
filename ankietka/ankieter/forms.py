@@ -1,9 +1,9 @@
 from django import forms
-from .models import Pytanie, Wybor
+from .models import Pytanie, Wybor, Grupa, Ankieta
 
 
 
-class StworzAnkiete(forms.ModelForm):
+class StworzPytanie(forms.ModelForm):
     class Meta:
         model = Pytanie
         fields = ['pytanie_text', 'pytanie_plik']
@@ -17,3 +17,16 @@ class StworzWybor(forms.ModelForm):
         model = Wybor
         fields = '__all__'
         exclude = ['votes', 'pytanie']
+
+
+
+class StworzAnkiete(forms.ModelForm):
+    class Meta:
+        model = Ankieta
+        fields = ['nazwa_ankiety',]
+
+
+class StworzGrupe(forms.ModelForm):
+    class Meta:
+        model = Grupa
+        fields = ['nazwa_grupy',]
