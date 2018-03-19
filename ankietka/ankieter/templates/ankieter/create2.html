@@ -2,11 +2,11 @@
 
 {% block content %}
   <div class="create">
-    <h2>Stworz sb ankietke</h2>
+    <h2>Stworz sb grupke</h2>
     <br></br>
-    <form class="site-form" action="{% url 'ankieter:create' %}" method="post" enctype="multipart/form-data">
+    <form class="site-form" action="{% url 'ankieter:create2' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ form }}
+      {{ form2 }}
       <input type="submit" value="Stworz">
     </form>
 

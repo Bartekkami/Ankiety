@@ -7,7 +7,6 @@
 {% for grupa in ankieta.grupa_set.all %}
   <li> {{ grupa.nazwa_grupy }} </li>
 
-
 <ul>
 {% for pytanie in grupa.pytanie_set.all %}
 <p>Pytanie {% if pytanie.autor.is_superuser %}administratora {% else %}uzytkownika {% endif %}{{pytanie.autor}} :</p>

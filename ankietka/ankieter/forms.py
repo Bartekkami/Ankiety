@@ -6,7 +6,7 @@ from .models import Pytanie, Wybor, Grupa, Ankieta
 class StworzPytanie(forms.ModelForm):
     class Meta:
         model = Pytanie
-        fields = ['pytanie_text', 'pytanie_plik']
+        fields = ['pytanie_text', 'pytanie_plik', 'grupa', 'ankieta']
         exclude = ['autor', 'pub_date']
 
 
@@ -29,4 +29,4 @@ class StworzAnkiete(forms.ModelForm):
 class StworzGrupe(forms.ModelForm):
     class Meta:
         model = Grupa
-        fields = ['nazwa_grupy',]
+        fields = ['nazwa_grupy', 'ankieta',]
