@@ -74,6 +74,15 @@ def logout_view(request):
     return redirect('ankieter:index')
 
 
+
+class Glownawyniki(generic.ListView):
+    template_name = 'ankieter/glownawyniki.html'
+    context_object_name = 'lista_ostatnich_ankiet'
+
+    def get_queryset(self):
+        return Ankieta.objects.order_by('id') [:15]
+
+
 #@login_required(login_url="/ankieter/login/")
 #def create_view(request):
 #    if request.method == 'POST':
@@ -134,7 +143,7 @@ def dodaj_grupe(request):
         form2 = forms.StworzGrupe(request.POST, request.FILES)
         if form2.is_valid():
             instance2 = form2.save(commit=False)
-        #    instance.ankieta =
+#            instance2.ankieta =
             instance2.save()
             return redirect('ankieter:create3')
     else:
@@ -147,6 +156,8 @@ def dodaj_pytanie(request):
         form3 = forms.StworzPytanie(request.POST, request.FILES)
         if form3.is_valid():
             instance3 = form3.save(commit=False)
+            instance3.pub_date = timezone.now()
+            instance3.autor = request.user
             instance3.save()
             return redirect('ankieter:create4')
     else:
@@ -159,11 +170,15 @@ def dodaj_wybor(request):
         form4 = forms.StworzWybor(request.POST, request.FILES)
         if form4.is_valid():
             instance4 = form4.save(commit=False)
+#            instance4.pytanie_id =
             instance4.save()
             return redirect('ankieter:create4')
     else:
         form4 = forms.StworzWybor()
     return render(request, 'ankieter/create4.html', {'form4':form4})
+
+
+
 
 
 

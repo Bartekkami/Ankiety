@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^create2/$', views.dodaj_grupe, name="create2"),
     url(r'^create3/$', views.dodaj_pytanie, name="create3"),
     url(r'^create4/$', views.dodaj_wybor, name="create4"),
+    url(r'^glownawyniki$', views.Glownawyniki.as_view(), name="glownawyniki"),
     path('<int:pk>/', views.SzczegolyView.as_view(), name='szczegoly'),
     path('<int:pk>/wyniki/', views.WynikiView.as_view(), name='wyniki'),
     path('<int:pytanie_id>/glos/', views.glos, name='glos'),

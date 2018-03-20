@@ -15,18 +15,23 @@
             <p> Witaj {{ user }}</p>
             <form class="logout-link" action="{% url 'ankieter:logout' %}" method="post">
                 {% csrf_token %}
+                <a href="{% url 'ankieter:create'%}">Stworz Ankiete<a/>
+                  <br>
+                  <a href="{% url 'ankieter:glownawyniki'%}">Strona Wynikow<a/>
+                  <br>
+                  <a href="{% url 'ankieter:profil'%}">Profil<a/>
+                  <br>
+                  {% if user.is_superuser %}
+                  <a href=/admin/>Admin<a/>
+                  {% endif %}
+                  <br>
                 <button type="submit">Wyloguj</button>
-
-              <a href="{% url 'ankieter:create'%}">Stworz Ankiete<a/>
-                <a href="{% url 'ankieter:profil'%}">Profil<a/>
-
+                <br>
                 {% else %}
                 <a href="{% url 'ankieter:login'%}">Loguj<a/>
                 <a href="{% url 'ankieter:signup'%}">Zarejestruj<a/>
                 {% endif %}
-                {% if user.is_superuser %}
-                <a href=/admin/>Admin<a/>
-                {% endif %}
+
             </form>
         </ul>
       </nav>

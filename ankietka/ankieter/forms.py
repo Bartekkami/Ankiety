@@ -16,7 +16,7 @@ class StworzWybor(forms.ModelForm):
     class Meta:
         model = Wybor
         fields = '__all__'
-        exclude = ['votes', 'pytanie']
+        exclude = ['votes', ]
 
 
 
