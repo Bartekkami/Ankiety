@@ -1,0 +1,12 @@
+{% extends 'podstawa.html' %}
+
+{% block content %}
+<p> Grupy Ankiety {{ ankieta.nazwa_ankiety }} </p>
+<ul>
+  {% for g in grupy %}
+    <li><a href="{% url 'ankieter:pytania' g.id %}">{{ g.nazwa_grupy }}</a></li>
+  {% endfor %}
+</ul>
+<a href="{% url 'ankieter:create2'%}"> + Grupa </a>
+
+{% endblock %}

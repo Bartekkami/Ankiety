@@ -1,0 +1,12 @@
+{% extends 'podstawa.html' %}
+
+{% block content %}
+<p> Grupy Ankiety {{ ankieta.pk }} </p>
+<ul>
+  {% for p in pytania %}
+    <li><a href="{% url 'ankieter:pytania' pytanie.id %}">{{ pytanie.pytanie_text }}</a></li>
+  {% endfor %}
+</ul>
+<a href="{% url 'ankieter:create3'%}"> + Pytanie </a>
+
+{% endblock %}

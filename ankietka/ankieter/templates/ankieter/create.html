@@ -1,10 +1,16 @@
 {% extends 'podstawa.html'%}
 
 {% block content %}
-<a href="{% url 'ankieter:create'%}"> Krok 1 : Tworzenie Ankiety</a><br>
-<a href="{% url 'ankieter:create2'%}"> Krok 2 : Tworzenie Grupy Pytan</a><br>
-<a href="{% url 'ankieter:create3'%}"> Krok 3 : Tworzenie Pytania</a><br>
-<a href="{% url 'ankieter:create4'%}"> Krok 4 : Tworzenie Odpowiedzi</a><br>
+<h1> Lista Ankiet </h1>
+{% if lista_ostatnich_ankiet %}
+    <ul>
+    {% for ankieta in lista_ostatnich_ankiet %}
+        <li><a href="{% url 'ankieter:wyniki' ankieta.id %}">{{ ankieta.nazwa_ankiety }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nie ma dostepnych ankiet.</p>
+{% endif %}
 
   <div class="create">
     <h2>Stworz sb ankietke</h2>

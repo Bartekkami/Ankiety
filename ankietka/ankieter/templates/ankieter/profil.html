@@ -7,13 +7,15 @@
 <ul>
   {% for ankieta in lista_ostatnich_ankiet %}
       {% if user == ankieta.autor %}
-        <li><a href="{% url 'ankieter:wyniki' ankieta.id %}">{{ ankieta.nazwa_ankiety }}</a></li>
+        <li><a href="{% url 'ankieter:grupy' ankieta.id %}">{{ ankieta.nazwa_ankiety }}</a></li>
       {% endif %}
   {% endfor %}
 </ul>
 {% else %}
     <p>Nie ma dostepnych ankiet.</p>
 {% endif %}
+
+<a href="{% url 'ankieter:create'%}"> + Ankieta </a>
 
 
 {% endblock %}
