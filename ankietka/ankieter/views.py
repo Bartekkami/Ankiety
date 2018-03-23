@@ -99,6 +99,7 @@ def grupy(request, pk):
     context = {
     'grupy': Grupa.objects.filter(ankieta = ankieta),
     'ankieta': ankieta
+
     }
     return render(request, 'ankieter/grupy.html', context)
 
@@ -111,6 +112,17 @@ def pytania(request, pk):
     'grupa': grupa
     }
     return render(request, 'ankieter/pytania.html', context)
+
+
+def wybory(request, pk):
+    pytanie = Pytanie.objects.get(id = pk)
+    context = {
+    'wybory': Wybor.objects.filter(pytanie = pytanie),
+    'pytanie': pytanie
+    }
+    return render(request, 'ankieter/wybory.html', context)
+
+
 
 
 
@@ -130,44 +142,51 @@ def dodaj_ankiete(request):
 
 
 @login_required(login_url="/ankieter/login/")
-def dodaj_grupe(request):
+def dodaj_grupe(request, pk):
+    ankieta = Ankieta.objects.get(id = pk)
     if request.method == 'POST':
         form2 = forms.StworzGrupe(request.POST, request.FILES)
         if form2.is_valid():
             instance2 = form2.save(commit=False)
-#            instance2.ankieta =
+            instance2.ankieta = ankieta
             instance2.save()
             return redirect('ankieter:profil')
     else:
         form2 = forms.StworzGrupe()
-    return render(request, 'ankieter/create2.html', {'form2':form2})
+    return render(request, 'ankieter/create2.html', {'form2':form2, 'ankieta':ankieta})
 
 @login_required(login_url="/ankieter/login/")
-def dodaj_pytanie(request):
+def dodaj_pytanie(request, pk):
+    grupa = Grupa.objects.get(id = pk)
+#    ankieta = Ankieta
     if request.method == 'POST':
         form3 = forms.StworzPytanie(request.POST, request.FILES)
         if form3.is_valid():
             instance3 = form3.save(commit=False)
             instance3.pub_date = timezone.now()
             instance3.autor = request.user
+            instance3.grupa = grupa
+#            instance3.ankieta = Ankieta
             instance3.save()
-            return redirect('ankieter:create4')
+            return redirect('ankieter:profil')
     else:
         form3 = forms.StworzPytanie()
-    return render(request, 'ankieter/create3.html', {'form3':form3})
+    return render(request, 'ankieter/create3.html', {'form3':form3, 'grupa':grupa})
 
 @login_required(login_url="/ankieter/login/")
-def dodaj_wybor(request):
+def dodaj_wybor(request, pk):
+    pytanie = Pytanie.objects.get(id = pk)
     if request.method =='POST':
         form4 = forms.StworzWybor(request.POST, request.FILES)
         if form4.is_valid():
             instance4 = form4.save(commit=False)
-#            instance4.pytanie_id =
+            instance4.pytanie = pytanie
+            instance4.votes = 0
             instance4.save()
-            return redirect('ankieter:create4')
+            return redirect('ankieter:profil')
     else:
         form4 = forms.StworzWybor()
-    return render(request, 'ankieter/create4.html', {'form4':form4})
+    return render(request, 'ankieter/create4.html', {'form4':form4, 'pytanie':pytanie})
 
 
 

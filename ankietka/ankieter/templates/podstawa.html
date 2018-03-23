@@ -12,11 +12,9 @@
       <nav>
         <ul>
             {% if user.is_authenticated  %}
-            <p> Witaj {{ user }}</p>
+            <p> Witaj {{ user }} !</p>
             <form class="logout-link" action="{% url 'ankieter:logout' %}" method="post">
                 {% csrf_token %}
-                <a href="{% url 'ankieter:create'%}">Stworz Ankiete<a/>
-                  <br>
                   <a href="{% url 'ankieter:glownawyniki'%}">Strona Wynikow<a/>
                   <br>
                   <a href="{% url 'ankieter:profil'%}">Profil<a/>

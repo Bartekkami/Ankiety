@@ -6,7 +6,7 @@
   <div class="create">
     <h2>Stworz sb pytanko</h2>
     <br></br>
-    <form class="site-form" action="{% url 'ankieter:create3' %}" method="post" enctype="multipart/form-data">
+    <form class="site-form" action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form3 }}
       <input type="submit" value="Stworz">

@@ -1,0 +1,12 @@
+{% extends 'podstawa.html' %}
+
+{% block content %}
+<p> Wybory Pytania: "{{ pytanie.pytanie_text }}" </p>
+<ul>
+  {% for w in wybory %}
+  <li>  {{ w }} {% if w.plik.url is not None %}<img src="{{ w.plik.url }}"  />{% endif %} </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'ankieter:create4' pytanie.id %}"> + Wybor </a>
+
+{% endblock %}
